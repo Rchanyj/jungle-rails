@@ -132,5 +132,41 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+# TEST REVIEWS
+
+p1 = Product.find(1)
+p2 = Product.find(2)
+p3 = Product.find(3)
+
+p1.reviews.create!({
+  user_id: 3,
+  rating: 4,
+  description: 'Great product, could use a better name though!'
+  })
+
+p1.reviews.create!({
+  user_id: 2,
+  rating: 5,
+  description: 'Such greatness much wow'
+  })
+
+p2.reviews.create!({
+  user_id: 1,
+  rating: 2,
+  description: 'I cans makes much bettr prodcuts n00b'
+  })
+
+p3.reviews.create!({
+  user_id: 4,
+  rating: 5,
+  description: 'Ah product, I commend thee!'
+  })
+
+p3.reviews.create!({
+  user_id: 7,
+  rating: 3,
+  description: 'This is.............acceptable.'
+  })
+
 
 puts "DONE!"

@@ -26,6 +26,41 @@
       </div>
     </div>
 
+    <div class="row">
+    <h1>Review this product!</h1>
+
+      <%= form_for @product, url: product_reviews_path(@product.id), method: "post" do |f| %>
+        Review:
+        <ul>
+          <%= f.fields_for :review do |r_form| %>
+          <li>
+            <%= select_tag(:rating, options_for_select([[5], [4], [3], [2], [1]])) %>
+
+            <%= r_form.label :description %>
+            <%= r_form.text_area :description %>
+          </li>
+          <% end %>
+        </ul>
+      <%= f.submit "Submit review!" %>
+
+      <% end %>
+    </div>
+
+    <% if !@reviews.nil? %>
+      <div class="row">
+        <div class="col-sm-8">
+          <dl class="dl-horizontal">
+          <% @reviews.each do |review| %>
+            <dt>Rating</dt>
+            <dd><%= review.rating %></dd>
+            <dt>Review</dt>
+            <dd><%= review.user_id %> : <%= review.description %></dd>
+          <% end %>
+          </dl>
+        </div>
+      </div>
+    <% end %>
+
   </article>
 
 </section>
