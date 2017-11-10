@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content: 'text/html'; charset=UTF-8' http-equiv='Content-Type'/>
+  </head>
+  <body>
+    <h1>Thanks for venturing into the Jungle!</h1>
+      <p>
+        This is to confirm your purchase. Attached is a summary of your transaction!
+      </p>
+      <table>
+        <tbody>
+          <% @total = 0 %>
+          <% @order.line_items.each do |details| %>
+            <% @total += details.total_price %>
+            <p><%= details.product.name %> x<%= details.quantity%></p>
+          <% end %>
+          <p> Your total was: <%= @total %> </p>
+        </tbody>
+      </table>
+      <p>
+        Thanks, please visit again!
+      </p>
+  </body>
+</html>
