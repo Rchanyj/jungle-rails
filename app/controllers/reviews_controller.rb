@@ -24,9 +24,9 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review =
+    @review = Review.find(params[:id])
     @review.destroy
-    redirect_to :controller=>'products', :action=>"show", :id=>@product.id
+    redirect_to :controller=>'products', :action=>"show", :id=>@review.product_id
   end
 
   private
