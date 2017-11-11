@@ -26,25 +26,25 @@
       </div>
     </div>
 
-    <div class="row">
-    <h1>Review this product!</h1>
+    <% if current_user %>
+      <div class="row">
+      <h1>Review this product!</h1>
 
-      <%= form_for @product, url: product_reviews_path(@product.id), method: "post" do |f| %>
-        Review:
-        <ul>
-          <%= f.fields_for :review do |r_form| %>
-          <li>
-            <%= select_tag(:rating, options_for_select([[5], [4], [3], [2], [1]])) %>
+        <%= form_for @review, url: product_reviews_path(@product.id), method: "post" do |f| %>
+          Review:
+          <ul>
+            <li>
+              <%= f.select(:rating, options_for_select([[5], [4], [3], [2], [1]])) %>
 
-            <%= r_form.label :description %>
-            <%= r_form.text_area :description %>
-          </li>
-          <% end %>
-        </ul>
-      <%= f.submit "Submit review!" %>
+              <%= f.label :description %>
+              <%= f.text_area :description %>
+            </li>
+          </ul>
+        <%= f.submit "Submit review!" %>
 
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+    <% end %>
 
     <% if !@reviews.nil? %>
       <div class="row">
@@ -54,7 +54,8 @@
             <dt>Rating</dt>
             <dd><%= review.rating %></dd>
             <dt>Review</dt>
-            <dd><%= review.user_id %> : <%= review.description %></dd>
+            <% @username = User.find(review.user_id).firstname %>
+            <dd><%= @username %> : <%= review.description %></dd>
           <% end %>
           </dl>
         </div>
