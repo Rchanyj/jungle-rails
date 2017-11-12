@@ -83,7 +83,17 @@ main section.products-show {
   .product-detail {
     img.main-img {
       max-width: 100%;
+      border-radius: 10px;
     }
+  }
+
+  .review-submit-row {
+    margin-left: 400px;
+  }
+
+  .review-display-row {
+    width: 1000px;
+    margin-left: 250px;
   }
 }
 

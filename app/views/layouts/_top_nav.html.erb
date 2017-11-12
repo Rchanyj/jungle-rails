@@ -44,7 +44,7 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
-        <span class="user-name">
+        <span class="login-details">
           <% if current_user %>
             Signed in as <%= current_user.firstname %> | <%= link_to "Logout", '/logout' %>
           <% else %>

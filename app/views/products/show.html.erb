@@ -27,40 +27,58 @@
     </div>
 
     <% if current_user %>
-      <div class="row">
-      <h1>Review this product!</h1>
-
-        <%= form_for @review, url: product_reviews_path(@product.id), method: "post" do |f| %>
-          Review:
-          <ul>
-            <li>
+      <div class="review-submit-row">
+        <div class="col-sm-6 col-sm-offset-1">
+          <%= form_for @review, url: product_reviews_path(@product.id), method: "post" do |f| %>
+            <header class="page-header">
+              <h3>Review this product:</h3>
+            </header>
+            <div class="form-group">
               <%= f.select(:rating, options_for_select([[5], [4], [3], [2], [1]])) %>
 
-              <%= f.label :description %>
+              <%= f.label "Rate and review" %>
               <%= f.text_area :description %>
-            </li>
-          </ul>
-        <%= f.submit "Submit review!" %>
-
-        <% end %>
+            </div>
+              <%= f.submit "Submit review!", class: 'btn btn-primary' %>
+          <% end %>
+        </div>
       </div>
     <% end %>
 
     <% if !@reviews.nil? %>
-      <div class="row">
-        <div class="col-sm-8">
+      <div class="review-display-row">
+        <div class="col-sm-6 col-sm-offset-1">
+        <header class="page-header">
+          <h5>What others have been saying about <%= @product.name %>:</h5>
+        </header>
+          <% if @reviews.empty? %>
+            <h7> No one has reviewed this product yet! Be the first! </h7>
+          <% end %>
           <dl class="dl-horizontal">
           <% @reviews.each do |review| %>
-            <dt>Rating</dt>
-            <dd><%= review.rating %></dd>
-            <dt>Review</dt>
             <% @username = User.find(review.user_id).firstname %>
-            <dd><%= @username %> : <%= review.description %></dd>
-            <% if current_user %>
-              <% if review.user_id == current_user.id %>
-                <%= link_to fa_icon('trash'), [review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
-              <% end %>
-            <% end %>
+            <div class="panel panel-default categories">
+              <table class="table table-bordered">
+                <head>
+                  <tr>
+                    <th colspan="2"><%= @username %></th>
+                    <% if current_user %>
+                      <% if review.user_id == current_user.id %>
+                        <%= link_to fa_icon('trash'), [review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+                      <% end %>
+                    <% end %>
+                  </tr>
+                </head>
+                <tbody>
+                  <tr>
+                    <td>
+                      <h5>Rating: <%= review.rating %></h5>
+                      <h7><%= review.description %></h7>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           <% end %>
           </dl>
         </div>

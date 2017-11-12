@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
   def new
+    session[:prev] ||= request.referrer
+    puts "prev url: ", request.referrer
   end
 
   def create
@@ -8,7 +10,7 @@ class UsersController < ApplicationController
 
     if user.save
       session[:user_id] = user.id
-      redirect_to '/'
+      redirect_to session.delete(:prev)
     else
       redirect_to '/signup'
     end

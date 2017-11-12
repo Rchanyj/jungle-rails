@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    session[:prev] ||= request.referrer
   end
 
   def create
@@ -8,7 +9,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to '/'
+      redirect_to session.delete(:prev)
     else
       redirect_to '/login'
     end
@@ -16,7 +17,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to '/'
+    redirect_to (:back)
   end
 
 end
