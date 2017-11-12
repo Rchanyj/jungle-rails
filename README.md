@@ -1,9 +1,9 @@
 # Jungle
 
-A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
+Welcome to the Jungle! Jungle is a quick and simple online store hosting a diverse range of products. Create an account for easy purchases just clicks away! Happy swinging!
 
 
-## Setup
+## Setup (to run on local server)
 
 1. Fork & Clone
 2. Run `bundle install` to install dependencies
@@ -27,7 +27,7 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 * PostgreSQL 9.x
 * Stripe
 
-##Screenshots
+## Screenshots
 
 !['Home page'](https://github.com/Rchanyj/jungle-rails/blob/master/docs/homepage.png?raw=true)
 
