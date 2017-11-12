@@ -26,3 +26,14 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 * Rails 4.2 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
 * PostgreSQL 9.x
 * Stripe
+
+##Screenshots
+
+!['Home page'](https://github.com/Rchanyj/jungle-rails/blob/master/docs/homepage.png?raw=true)
+
+!['Product details (logged in)'](https://github.com/Rchanyj/jungle-rails/blob/master/docs/loggedin_product_details.png?raw=true)
+
+!['Purchase cart'](https://github.com/Rchanyj/jungle-rails/blob/master/docs/cart.png?raw=true)
+
+!['Admin creating a new category'](https://github.com/Rchanyj/jungle-rails/blob/master/docs/admin_create_category.png?raw=true)
+
