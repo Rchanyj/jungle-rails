@@ -2,6 +2,10 @@ class SessionsController < ApplicationController
 
   def new
     session[:prev] ||= request.referrer
+    session[:rawprev] = request.referrer
+    if session[:prev] != session[:rawprev] && session[:rawprev] != "http://localhost:3000/login"
+      session[:realprev] = session[:rawprev]
+    end
   end
 
   def create
@@ -9,8 +13,9 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to session.delete(:prev)
+      redirect_to session.delete(:realprev)
     else
+      flash[:notice] = '*Please fill out all fields!'
       redirect_to '/login'
     end
   end

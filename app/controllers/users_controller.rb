@@ -2,7 +2,10 @@ class UsersController < ApplicationController
 
   def new
     session[:prev] ||= request.referrer
-    puts "prev url: ", request.referrer
+    session[:rawprev] = request.referrer
+    if session[:prev] != session[:rawprev] && session[:rawprev] != "http://localhost:3000/signup"
+      session[:realprev] = session[:rawprev]
+    end
   end
 
   def create
@@ -10,9 +13,10 @@ class UsersController < ApplicationController
 
     if user.save
       session[:user_id] = user.id
-      redirect_to session.delete(:prev)
+      redirect_to session.delete(:realprev)
     else
-      redirect_to '/signup'
+      flash[:notice] = '*Please fill out all fields!'
+      redirect_to signup_url
     end
   end
 
