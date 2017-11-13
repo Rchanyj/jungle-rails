@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to session.delete(:realprev)
     else
-      flash[:notice] = '*Please fill out all fields!'
+      flash[:notice] = "Whoops! Your entry doesn't match our records! Please make sure you filled everything out properly!"
       redirect_to '/login'
     end
   end
