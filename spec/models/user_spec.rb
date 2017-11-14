@@ -68,8 +68,41 @@ RSpec.describe User, type: :model do
       @user.save
       expect(@user.errors.full_messages).to include ("Password is too short (minimum is 6 characters)")
     end
+  end
+
+  describe '.authenticate_with_credentials' do
+    it 'should authenticate' do
+      User.create!(firstname: "Billay", lastname: "Bob", password: "asdfas", password_confirmation: "asdfas", email: "uniQUE@unique.com")
+      @user = User.authenticate_with_credentials("uniQUE@unique.com", "asdfas")
+      expect(@user).not_to be nil
+    end
+
+    it 'should not authenticate with unmatching email (user nil)' do
+      User.create!(firstname: "Billay", lastname: "Bob", password: "asdfas", password_confirmation: "asdfas", email: "uniQUE@unique.com")
+      @user = User.authenticate_with_credentials("uni@unique.com", "asdfas")
+      expect(@user).to be nil
+    end
+
+    it 'should not authenticate with unauthenticated password' do
+      User.create!(firstname: "Billay", lastname: "Bob", password: "asdfas", password_confirmation: "asdfas", email: "uniQUE@unique.com")
+      @user = User.authenticate_with_credentials("uniQUE@unique.com", "asdfasedsa")
+      expect(@user).to be nil
+    end
+
+    it 'should authenticate with spaces before/after email' do
+      User.create!(firstname: "Billay", lastname: "Bob", password: "asdfas", password_confirmation: "asdfas", email: "uniQUE@unique.com")
+      @user = User.authenticate_with_credentials(" uniQUE@unique.com", "asdfas")
+      expect(@user).not_to be nil
+    end
+
+    it 'should authenticate email without being case-sensitive' do
+      User.create!(firstname: "Billay", lastname: "Bob", password: "asdfas", password_confirmation: "asdfas", email: "uniQUE@unique.com")
+      @user = User.authenticate_with_credentials("uniQue@unIque.COM", "asdfas")
+      expect(@user).not_to be nil
+    end
 
   end
+
 end
 
 
