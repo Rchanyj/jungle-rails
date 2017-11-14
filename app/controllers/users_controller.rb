@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to session.delete(:realprev)
     else
-      flash[:notice] = '*Please fill out all fields!'
+      flash[:notice] = user.errors.full_messages
       redirect_to signup_url
     end
   end

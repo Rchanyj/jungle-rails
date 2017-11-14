@@ -2,7 +2,12 @@
   <h1>Create an account!</h1>
 </header>
 
-<div><h5><%= flash[:notice] unless flash[:notice].blank? %><br></h5></div>
+<div><h5><% if !flash[:notice].blank? %>
+            <% flash[:notice].each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          <% end %>
+  <br></h5></div>
 
 <div class="row">
   <div class="col-sm-6 col-sm-offset-1">
