@@ -37,3 +37,6 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 
 !['Admin creating a new category'](https://github.com/Rchanyj/jungle-rails/blob/master/docs/admin_create_category.png?raw=true)
 
+### Currently in development:
+
+1. Use a safer method to redirect to previous page after logging in (and fix current issue with sessions)

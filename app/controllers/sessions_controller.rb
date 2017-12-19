@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  # TODO/DOING: use a safer method for redirects; figure out issue with sessions working
+  # without an else condition (session storage)
   def new
     session[:prev] ||= request.referrer
     session[:rawprev] = request.referrer
